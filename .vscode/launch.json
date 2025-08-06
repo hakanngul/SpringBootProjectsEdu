@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "SpringRestApiApplication",
+            "request": "launch",
+            "mainClass": "com.hakangul.starter.SpringRestApiApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "MainClass",
+            "request": "launch",
+            "mainClass": "com.proxfix.spring_project1.main.MainClass",
+            "projectName": "spring-project1"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringProject1Application<spring-project1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.proxfix.spring_project1.SpringProject1Application",
+            "projectName": "spring-project1",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

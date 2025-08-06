@@ -1,0 +1,13 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-17",
+            "path": "/Users/hakangul/Library/Java/JavaVirtualMachines/ms-17.0.16/Contents/Home",
+            "default": true
+        }
+    ],
+    "java.home": "/Users/hakangul/Library/Java/JavaVirtualMachines/ms-17.0.16/Contents/Home"
+}
