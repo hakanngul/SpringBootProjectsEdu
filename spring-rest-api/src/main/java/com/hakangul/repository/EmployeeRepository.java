@@ -26,4 +26,16 @@ public class EmployeeRepository {
         return employeeList;
     }
 
+    public Employee getEmployeeById(String id) {
+        Employee findEmp = null;
+        for (Employee employee : employeeList) {
+            if(id.equals(employee.getId())) {
+                findEmp = employee;
+                break;
+            }
+        }
+
+        return findEmp;
+    }
+
 }
