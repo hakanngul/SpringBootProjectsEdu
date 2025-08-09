@@ -9,5 +9,23 @@
             "default": true
         }
     ],
-    "java.home": "/Users/hakangul/Library/Java/JavaVirtualMachines/ms-17.0.16/Contents/Home"
+    "java.home": "/Users/hakangul/Library/Java/JavaVirtualMachines/ms-17.0.16/Contents/Home",
+    "maven.terminal.favorites": [
+        {
+            "command": "clean compile",
+            "debug": false
+        },
+        {
+            "command": "clean install",
+            "debug": false
+        },
+        {
+            "command": "clean verify",
+            "debug": false
+        },
+        {
+            "command": "clean verify -DskipTests",
+            "debug": false
+        }
+    ]
 }
