@@ -13,15 +13,16 @@ import com.hakangul.model.Employee;
  * @author hakangul
  */
 
- @Configuration
+@Configuration
 public class AppConfig {
 
     @Bean
     public List<Employee> employees() {
         return List.of(
-            new Employee("1", "Hakan", "Gul"),
-            new Employee("2", "Melih", "Furkan"),
-            new Employee("3", "Yusuf", "Bölüm")
-        );
+                new Employee("1", "Hakan", "Gul"),
+                new Employee("2", "Melih", "Furkan"),
+                new Employee("3", "Yusuf", "Bölüm"),
+                new Employee("4", "Furkan", "Bölüm"),
+                new Employee("5", "Hakan", "Atıcı"));
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hakangul.model.Employee;
+import com.hakangul.model.UpdateEmployeeRequest;
 import com.hakangul.repository.EmployeeRepository;
 
 /**
@@ -30,4 +31,20 @@ public class EmployeeService {
     public Employee getEmployeeById(String id) {
         return employeeRepository.getEmployeeById(id);
     }
+    public List<Employee> getEmployeeWithParams(String firstName, String lastName) {
+        return employeeRepository.getEmployeeWithParams(firstName, lastName);
+    }
+
+    public Employee saveEmployee(Employee newEmployee) {
+        return employeeRepository.saveEmployee(newEmployee);
+    }
+
+    public boolean deleteEmployeeById(String id) {
+        return employeeRepository.deleteEmployeeById(id);
+    }
+
+    public Employee updatEmployee(String id, UpdateEmployeeRequest updateEmployee) {
+        return employeeRepository.updatEmployee(id, updateEmployee);
+    }
+
 }
