@@ -26,6 +26,14 @@
         {
             "command": "clean verify -DskipTests",
             "debug": false
+        },
+        {
+            "command": "clean install -DskipTests",
+            "debug": false
+        },
+        {
+            "command": "spring-boot:run",
+            "debug": false
         }
     ]
 }
