@@ -2,18 +2,20 @@ package com.hakangul.service;
 
 import java.util.List;
 
-import com.hakangul.entities.Student;
+import com.hakangul.dto.DtoStudent;
+import com.hakangul.dto.DtoStudentIU;
+
 
 public interface IStudentService {
 
-    public Student saveStudent(Student student);
+    public DtoStudent saveStudent(DtoStudentIU student);
 
-    public List<Student> getAllStudents();
+    public List<DtoStudent> getAllStudents();
     
-    public Student getStudentById(Long id);
+    public DtoStudent getStudentById(Long id);
 
     public void deleteStudentById(Long id);
 
-    public Student updateStudent(Long id, Student updaStudent);
+    public DtoStudent updateStudent(Long id, DtoStudentIU updaStudent);
 
 }

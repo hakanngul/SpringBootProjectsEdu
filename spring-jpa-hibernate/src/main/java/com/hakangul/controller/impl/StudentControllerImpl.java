@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hakangul.controller.IStudentController;
-import com.hakangul.entities.Student;
+import com.hakangul.dto.DtoStudent;
+import com.hakangul.dto.DtoStudentIU;
 import com.hakangul.service.IStudentService;
 
 
@@ -29,19 +30,19 @@ public class StudentControllerImpl implements IStudentController {
     //Normalde DTO lar kullanılır direkt Student objesi kullanılmaz.
     @PostMapping(path= "/save")
     @Override
-    public Student savStudent(@RequestBody Student student) {
-        return studentService.saveStudent(student);
+    public DtoStudent saveStudent(@RequestBody DtoStudentIU dtoStudentIU) {
+        return studentService.saveStudent(dtoStudentIU);
     }
 
     @GetMapping(path= "/list")
     @Override
-    public List<Student> getAllStudents() {
+    public List<DtoStudent> getAllStudents() {
         return studentService.getAllStudents();
     }
 
     @GetMapping(path= "/list/{id}")
     @Override
-    public Student getStudentById(@PathVariable(name="id") Long id) {
+    public DtoStudent getStudentById(@PathVariable(name="id") Long id) {
         return studentService.getStudentById(id);
     }
     
@@ -53,7 +54,7 @@ public class StudentControllerImpl implements IStudentController {
 
     @PutMapping(path= "/update/{id}")
     @Override
-    public Student updateStudent(@PathVariable(name="id") Long id, @RequestBody Student updaStudent) {
+    public DtoStudent updateStudent(@PathVariable(name="id") Long id, @RequestBody DtoStudentIU updaStudent) {
         return studentService.updateStudent(id, updaStudent);
     }
 }
