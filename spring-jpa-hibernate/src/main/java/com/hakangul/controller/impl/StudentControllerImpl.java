@@ -17,6 +17,8 @@ import com.hakangul.dto.DtoStudent;
 import com.hakangul.dto.DtoStudentIU;
 import com.hakangul.service.IStudentService;
 
+import jakarta.validation.Valid;
+
 
 
 @RestController
@@ -30,7 +32,7 @@ public class StudentControllerImpl implements IStudentController {
     //Normalde DTO lar kullanılır direkt Student objesi kullanılmaz.
     @PostMapping(path= "/save")
     @Override
-    public DtoStudent saveStudent(@RequestBody DtoStudentIU dtoStudentIU) {
+    public DtoStudent saveStudent(@RequestBody @Valid DtoStudentIU dtoStudentIU) {
         return studentService.saveStudent(dtoStudentIU);
     }
 
