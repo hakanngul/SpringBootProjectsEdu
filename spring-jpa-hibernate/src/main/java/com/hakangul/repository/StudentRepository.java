@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.hakangul.entities.Student;
 
 @Repository
-public interface IStudentRepository extends JpaRepository<Student, Long> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Query(value = "FROM Student", nativeQuery = false)
     List<Student> findAllStudents();

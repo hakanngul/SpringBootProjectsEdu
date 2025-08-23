@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 import com.hakangul.dto.DtoStudent;
 import com.hakangul.dto.DtoStudentIU;
 import com.hakangul.entities.Student;
-import com.hakangul.repository.IStudentRepository;
+import com.hakangul.repository.StudentRepository;
 import com.hakangul.service.IStudentService;
 
 @Service
 public class StudentServiceImpl implements IStudentService {
 
     @Autowired
-    private IStudentRepository studentRepository;
+    private StudentRepository studentRepository;
 
     @Override
     public DtoStudent saveStudent(DtoStudentIU dtoStudentIU) {
