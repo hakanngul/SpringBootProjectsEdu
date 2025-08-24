@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hakangul.dto.DtoCourse;
 import com.hakangul.dto.DtoStudent;
 import com.hakangul.dto.DtoStudentIU;
 import com.hakangul.entities.Student;
@@ -45,14 +46,24 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public DtoStudent getStudentById(Long id) {
+        DtoStudent dtoStudent = new DtoStudent();
         Optional<Student> optional = studentRepository.findById(id);
-        if (optional.isPresent()) {
-            DtoStudent dtoStudent = new DtoStudent();
-            BeanUtils.copyProperties(optional.get(), dtoStudent);
-            return dtoStudent;
-        } else {
+        
+        if(optional.isEmpty()) {
             return null;
         }
+
+        Student dbStudent = optional.get();
+        BeanUtils.copyProperties(dbStudent, dtoStudent);
+        if(dbStudent.getCourses() != null && !dbStudent.getCourses().isEmpty()) {
+            dbStudent.getCourses().forEach(course -> {
+                DtoCourse dtoCourse = new DtoCourse();
+                BeanUtils.copyProperties(course, dtoCourse);
+                dtoStudent.getCourses().add(dtoCourse);
+            });
+        }
+
+        return dtoStudent;
     }
 
     @Override
