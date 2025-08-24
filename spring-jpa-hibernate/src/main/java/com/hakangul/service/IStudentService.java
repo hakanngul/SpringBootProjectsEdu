@@ -3,7 +3,7 @@ package com.hakangul.service;
 import java.util.List;
 
 import com.hakangul.dto.DtoStudent;
-import com.hakangul.dto.DtoStudentIU;
+import com.hakangul.dto.IU.DtoStudentIU;
 
 
 public interface IStudentService {
@@ -16,6 +16,6 @@ public interface IStudentService {
 
     public void deleteStudentById(Long id);
 
-    public DtoStudent updateStudent(Long id, DtoStudentIU updaStudent);
+    public DtoStudent updateStudent(Long id, DtoStudentIU updateStudent);
 
 }

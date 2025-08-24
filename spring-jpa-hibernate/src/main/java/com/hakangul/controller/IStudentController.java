@@ -3,7 +3,7 @@ package com.hakangul.controller;
 import java.util.List;
 
 import com.hakangul.dto.DtoStudent;
-import com.hakangul.dto.DtoStudentIU;
+import com.hakangul.dto.IU.DtoStudentIU;
 
 
 

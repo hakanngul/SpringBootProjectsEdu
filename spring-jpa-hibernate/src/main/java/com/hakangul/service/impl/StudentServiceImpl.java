@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.hakangul.dto.DtoCourse;
 import com.hakangul.dto.DtoStudent;
-import com.hakangul.dto.DtoStudentIU;
+import com.hakangul.dto.IU.DtoStudentIU;
 import com.hakangul.entities.Student;
 import com.hakangul.repository.StudentRepository;
 import com.hakangul.service.IStudentService;
@@ -78,13 +78,13 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public DtoStudent updateStudent(Long id, DtoStudentIU updaStudent) {
+    public DtoStudent updateStudent(Long id, DtoStudentIU updateStudent) {
         Student dbStudent = getStudent(id);
         DtoStudent dto = new DtoStudent();
         if (dbStudent != null) {
-            dbStudent.setFirstName(updaStudent.getFirstName());
-            dbStudent.setLastName(updaStudent.getLastName());
-            dbStudent.setBirthOfDate(updaStudent.getBirthOfDate());
+            dbStudent.setFirstName(updateStudent.getFirstName());
+            dbStudent.setLastName(updateStudent.getLastName());
+            dbStudent.setBirthOfDate(updateStudent.getBirthOfDate());
             
             Student updatedStudent = studentRepository.save(dbStudent);
             BeanUtils.copyProperties(updatedStudent, dto);

@@ -1,5 +1,7 @@
 package com.hakangul.controller.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hakangul.controller.IAddressController;
 import com.hakangul.dto.DtoAddress;
+import com.hakangul.dto.IU.DtoAddressIU;
 import com.hakangul.service.IAddressService;
 
 @RestController
@@ -18,10 +21,41 @@ public class AddressControllerImpl implements IAddressController {
     private IAddressService addressService;
 
 
+
     @GetMapping(path ="/list/{id}")
     @Override
     public DtoAddress findAddressById(@PathVariable(name="id") Long id) {
         return addressService.findAddressById(id);
+    }
+
+
+
+    @Override
+    public DtoAddress saveAddress(DtoAddressIU dtoAddressIU) {
+        return addressService.saveAddress(dtoAddressIU);
+    }
+
+
+
+    @GetMapping(path ="/list")
+    @Override
+    public List<DtoAddress> findAllAddresses() {
+        return addressService.findAllAddress();
+    }
+
+
+
+    @Override
+    public void deleteAddressById(Long id) {
+        addressService.deleteAddressById(id);
+    }
+
+
+
+    @Override
+    public DtoAddress updateAddress(Long id, DtoAddressIU dtoAddress) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateAddress'");
     }
 
 }

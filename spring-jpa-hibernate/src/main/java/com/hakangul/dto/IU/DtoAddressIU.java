@@ -1,6 +1,5 @@
-package com.hakangul.dto;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
+package com.hakangul.dto.IU;
+import com.hakangul.dto.DtoCustomer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class DtoAddress {
+public class DtoAddressIU {
 
-    private Long id;
     private String description;
     private DtoCustomer customer;
 }

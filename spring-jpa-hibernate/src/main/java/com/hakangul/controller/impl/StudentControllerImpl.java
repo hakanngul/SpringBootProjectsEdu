@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hakangul.controller.IStudentController;
 import com.hakangul.dto.DtoStudent;
-import com.hakangul.dto.DtoStudentIU;
+import com.hakangul.dto.IU.DtoStudentIU;
 import com.hakangul.service.IStudentService;
 
 import jakarta.validation.Valid;
@@ -59,4 +59,5 @@ public class StudentControllerImpl implements IStudentController {
     public DtoStudent updateStudent(@PathVariable(name="id") Long id, @RequestBody DtoStudentIU updaStudent) {
         return studentService.updateStudent(id, updaStudent);
     }
+
 }

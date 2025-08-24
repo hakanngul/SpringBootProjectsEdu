@@ -1,4 +1,4 @@
-package com.hakangul.dto;
+package com.hakangul.dto.IU;
 
 import java.util.Date;
 
