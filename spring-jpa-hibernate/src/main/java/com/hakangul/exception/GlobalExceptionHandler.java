@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,6 +21,14 @@ public class GlobalExceptionHandler {
     private List<String> addMapValue(List<String> list, String newValue) {
         list.add(newValue);
         return list;
+    }
+
+        // AddressNotFoundException için handler - HTTP 404 döndürür
+    @ExceptionHandler(value = AddressNotFoundException.class)
+    public ResponseEntity<ApiError> handleAddressNotFoundException(AddressNotFoundException exception) {
+        String errorMessage = exception.getMessage();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(createApiError(errorMessage));
     }
 
     

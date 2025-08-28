@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.hakangul.dto.DtoAddress;
@@ -42,7 +43,8 @@ public class AddressServiceImpl implements IAddressService {
     @Override
     public List<DtoAddress> findAllAddress() {
         List<DtoAddress> dtoList = new ArrayList<>();
-        List<Address> addressList = addressRepository.findAll();
+
+        List<Address> addressList = addressRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
 
         addressList.forEach(address -> {
             DtoAddress dtoAddress = new DtoAddress();
@@ -66,6 +68,7 @@ public class AddressServiceImpl implements IAddressService {
 
     @Override
     public DtoAddress updateAddress(Long id, DtoAddressIU updateAddressIU) {
+        System.out.println("Gelen Address: " + updateAddressIU.getDescription());
         return Optional.ofNullable(getAddress(id))
                 .map(dbAddress -> {
                     // Update the entity with new values
@@ -77,7 +80,7 @@ public class AddressServiceImpl implements IAddressService {
                     // Convert to DTO using consistent logic with findById
                     return convertToDto(savedAddress);
                 })
-                .orElse(null);
+                .orElseThrow(() -> new AddressNotFoundException(id));
     }
 
     private Address getAddress(Long id) {
