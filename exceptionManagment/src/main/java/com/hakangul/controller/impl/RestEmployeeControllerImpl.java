@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hakangul.controller.IRestEmployeeController;
 import com.hakangul.dto.DtoEmployee;
+import com.hakangul.model.RootEntity;
 import com.hakangul.service.IEmployeeService;
 
 
 @RestController
 @RequestMapping("/rest/api/employee")
-public class RestEmployeeControllerImpl implements IRestEmployeeController {
+public class RestEmployeeControllerImpl extends RestBaseController implements IRestEmployeeController {
 
     @Autowired
     private IEmployeeService employeeService;
@@ -24,14 +25,14 @@ public class RestEmployeeControllerImpl implements IRestEmployeeController {
 
     @GetMapping("/list/{id}")
     @Override
-    public DtoEmployee findEmployeeById(@PathVariable Long id) {
-        return employeeService.finEmployeeById(id);
+    public RootEntity<DtoEmployee> findEmployeeById(@PathVariable Long id) {
+        return ok(employeeService.finEmployeeById(id));
     }
 
     @GetMapping("/list2/{id}")
     @Override
-    public DtoEmployee findEmployeeById2(@PathVariable Long id) {
-        return employeeService.findEmployeeById2(id);
+    public RootEntity<DtoEmployee> findEmployeeById2(@PathVariable Long id) {
+        return ok(employeeService.findEmployeeById2(id));
     }
 
     @GetMapping("/list")
@@ -46,6 +47,6 @@ public class RestEmployeeControllerImpl implements IRestEmployeeController {
     public List<DtoEmployee> findAllEmployees2() {
         return employeeService.findAllEmployees2();
     }
-    
+     
 
 }
