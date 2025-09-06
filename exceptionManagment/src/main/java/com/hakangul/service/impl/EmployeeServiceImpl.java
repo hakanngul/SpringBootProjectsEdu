@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import com.hakangul.dto.DtoDepartment;
 import com.hakangul.dto.DtoEmployee;
+import com.hakangul.exception.BaseException;
+import com.hakangul.exception.ErrorMessage;
+import com.hakangul.exception.MessageType;
 import com.hakangul.model.Department;
 import com.hakangul.model.Employee;
 import com.hakangul.repository.EmployeeRepository;
@@ -34,7 +37,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
 
         if (optionalEmployee.isEmpty()) {
-            return null;
+            throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXITS, id.toString()));
         }
         Employee employee = optionalEmployee.get();
         Department department = employee.getDepartment();
@@ -44,6 +47,17 @@ public class EmployeeServiceImpl implements IEmployeeService {
         dtoEmployee.setDepartment(dtoDepartment);
 
         return dtoEmployee;
+    }
+
+
+    @Override
+    public DtoEmployee findEmployeeById2(Long id) {
+        return modelMapper.map(
+            employeeRepository
+            .findById(id)
+            .orElseThrow(
+                () -> new BaseException(new ErrorMessage(MessageType.NOT_FOUND, id.toString() + " ModelMapper ile Yapıldı")))
+                , DtoEmployee.class);
     }
 
     @Override

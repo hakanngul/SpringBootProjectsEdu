@@ -8,6 +8,8 @@ public interface IRestEmployeeController {
 
     public DtoEmployee findEmployeeById(Long id);
 
+    public DtoEmployee findEmployeeById2(Long id);
+
     public List<DtoEmployee> findAllEmployees();
 
     public List<DtoEmployee> findAllEmployees2();

@@ -28,6 +28,12 @@ public class RestEmployeeControllerImpl implements IRestEmployeeController {
         return employeeService.finEmployeeById(id);
     }
 
+    @GetMapping("/list2/{id}")
+    @Override
+    public DtoEmployee findEmployeeById2(@PathVariable Long id) {
+        return employeeService.findEmployeeById2(id);
+    }
+
     @GetMapping("/list")
     @Override
     public List<DtoEmployee> findAllEmployees() {
@@ -38,7 +44,7 @@ public class RestEmployeeControllerImpl implements IRestEmployeeController {
     @GetMapping("/list2")
     @Override
     public List<DtoEmployee> findAllEmployees2() {
-        return employeeService.findAllEmployees();
+        return employeeService.findAllEmployees2();
     }
     
 
