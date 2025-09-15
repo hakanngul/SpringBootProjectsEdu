@@ -35,7 +35,7 @@ public class AppConfig {
      * Spring Security tarafından authentication işlemi sırasında kullanılır
      */
     @Bean
-    private UserDetailsService userDetailsService() {
+    public UserDetailsService userDetailsService() {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
