@@ -25,6 +25,7 @@ public class SecurityConfig {
     public static final String AUTHENTICATE = "/authenticate";
     // Kayıt endpoint'i
     public static final String REGISTER = "/register";
+    public static final String REFRESH_TOKEN = "/refresh-token";
 
     // Kimlik doğrulama sağlayıcısı - kullanıcı bilgilerini doğrular
     @Autowired
@@ -50,7 +51,7 @@ public class SecurityConfig {
                 // HTTP isteklerini yetkilendir
                 .authorizeHttpRequests(request -> request
                         // /authenticate ve /register endpoint'lerine herkesin erişebilmesine izin ver
-                        .requestMatchers(AUTHENTICATE, REGISTER)
+                        .requestMatchers(AUTHENTICATE, REGISTER,REFRESH_TOKEN)
                         .permitAll()
                         // Diğer tüm istekler için kimlik doğrulama gerekli
                         .anyRequest()

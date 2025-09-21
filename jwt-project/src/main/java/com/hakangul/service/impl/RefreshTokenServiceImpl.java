@@ -31,7 +31,7 @@ public class RefreshTokenServiceImpl implements IRefreshTokenService {
 
     private RefreshToken createRefreshToken(User user) {
         RefreshToken refreshToken = new RefreshToken();
-        refreshToken.setRefReshToken(UUID.randomUUID().toString());
+        refreshToken.setRefreshToken(UUID.randomUUID().toString());
         refreshToken.setExpireDate(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 4));
         refreshToken.setUser(user);
         return refreshToken;
@@ -51,7 +51,7 @@ public class RefreshTokenServiceImpl implements IRefreshTokenService {
         String accessToken = jwtService.generateToken(refreshToken.getUser());
         RefreshToken savedRefreshToken =  refreshTokenRepository.save(createRefreshToken(refreshToken.getUser()));
 
-        return new AuthResponse(accessToken, savedRefreshToken.getRefReshToken());
+        return new AuthResponse(accessToken, savedRefreshToken.getRefreshToken());
     }
 
 }

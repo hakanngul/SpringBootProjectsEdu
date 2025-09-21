@@ -24,7 +24,7 @@ public class RefreshToken {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    private String refReshToken;
+    private String refreshToken;
     private Date expireDate;
     @ManyToOne
     private User user;

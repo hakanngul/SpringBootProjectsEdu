@@ -43,7 +43,7 @@ public class AuthServiceImpl implements IAuthService {
 
     private RefreshToken createRefreshToken(User user) {
         RefreshToken refreshToken = new RefreshToken();
-        refreshToken.setRefReshToken(UUID.randomUUID().toString());
+        refreshToken.setRefreshToken(UUID.randomUUID().toString());
         refreshToken.setExpireDate(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 4));
         refreshToken.setUser(user);
         return refreshToken;
@@ -60,7 +60,7 @@ public class AuthServiceImpl implements IAuthService {
             RefreshToken refreshToken = createRefreshToken(opt.get());
             refreshTokenRepository.save(refreshToken);
 
-            return new AuthResponse(accessToken, refreshToken.getRefReshToken());
+            return new AuthResponse(accessToken, refreshToken.getRefreshToken());
         } catch (AuthenticationException e) {
             System.out.println("Kullanıcı Adı veya Şifre Hatalı");
         }
