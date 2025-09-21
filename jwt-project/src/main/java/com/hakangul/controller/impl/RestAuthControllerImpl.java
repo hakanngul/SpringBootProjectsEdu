@@ -24,4 +24,6 @@ public class RestAuthControllerImpl implements IRestAuthController {
     public DtoUser register(@Valid @RequestBody AuthRequest request) {
         return authService.register(request);
     }
+
+
 }

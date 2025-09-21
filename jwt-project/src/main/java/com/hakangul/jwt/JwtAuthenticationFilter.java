@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -41,6 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String header, token, username;
         
         // Authorization header'ını al
+        // Bearer ile başlayıp ..... token gelir.
         header = request.getHeader("Authorization");
         
         // Header yoksa veya Bearer ile başlamıyorsa, filtreyi geç ve devam et
@@ -73,7 +75,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         } catch (ExpiredJwtException e) {
             // Token süresi dolmuş hatası
             System.out.println("Token Süresi dolmuştur "+ e.getMessage());
-        } catch (Exception e) {
+        } catch (UsernameNotFoundException e) {
             // Genel hata yakalama
             System.out.println("Genel bir hata oluştu : "+ e.getLocalizedMessage());
         } 
