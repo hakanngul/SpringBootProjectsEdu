@@ -10,6 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.hakangul.jwt.AuthEntryPoint;
 import com.hakangul.jwt.JwtAuthenticationFilter;
 
 /**
@@ -33,6 +34,8 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    @Autowired
+    private AuthEntryPoint authEntryPoint;
     /**
      * Güvenlik filtre zincirini yapılandırır
      * @param httpSecurity HTTP güvenlik yapılandırma nesnesi
@@ -57,8 +60,9 @@ public class SecurityConfig {
                 // Kimlik doğrulama sağlayıcısını ekle
                 .authenticationProvider(authenticationProvider)
                 // JWT filtresini UsernamePasswordAuthenticationFilter'dan önce çalışacak şekilde ekle
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-        
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(authEntryPoint));
+    
         return httpSecurity.build();
     }
 }

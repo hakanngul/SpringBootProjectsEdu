@@ -2,6 +2,8 @@ package com.hakangul.jwt;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,11 +31,11 @@ public class JwtService {
      * @return Oluşturulan JWT token string'i
      */
     public String generateToken(UserDetails userDetails) {
-        // Map<String, Object> claimsMap = new HashMap<>();
-        // claimsMap.put("role", "ADMIN");
+        Map<String, Object> claimsMap = new HashMap<>();
+        claimsMap.put("role", "ADMIN");
         return Jwts.builder()
                 .setSubject(userDetails.getUsername()) // Token'ın sahibini belirler (kullanıcı adı)
-                // .setClaims(claimsMap)
+                .addClaims(claimsMap)
                 .setIssuedAt(new Date()) // Token'ın oluşturulma tarihini ayarlar
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 2)) // Token'ın geçerlilik süresi (2 saat)
                 //.setExpiration(new Date(System.currentTimeMillis() + 1000 * 10)) // Token'ın geçerlilik süresi (2 saat)
@@ -50,14 +52,24 @@ public class JwtService {
      */
     public <T> T exportToken(String token, Function<Claims, T> claimsFunction) {
         // Token'ı parse ederek claims (token içindeki bilgiler) kısmını alır
-        Claims claimsBody = Jwts
+        Claims claimsBody = getClaims(token);
+        return claimsFunction.apply(claimsBody); // Belirtilen fonksiyonu claims üzerinde uygular
+    }
+
+    public Object getClaimsByKey(String token, String key) {
+        Claims claimsBody = getClaims(token);
+        return claimsBody.get(key);
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts
         .parserBuilder()
         .setSigningKey(getKey()) // İmza doğrulaması için gizli anahtarı ayarlar
         .build()
         .parseClaimsJws(token) // Token'ı parse eder ve doğrular
         .getBody(); // Token'ın body kısmını (claims) alır
-        return claimsFunction.apply(claimsBody); // Belirtilen fonksiyonu claims üzerinde uygular
     }
+
 
     /**
      * JWT token'dan kullanıcı adını çıkarır

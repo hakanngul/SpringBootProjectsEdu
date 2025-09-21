@@ -1,5 +1,9 @@
 package com.hakangul.service.impl;
 
+import java.util.Date;
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -11,8 +15,10 @@ import org.springframework.stereotype.Service;
 import com.hakangul.jwt.AuthRequest;
 import com.hakangul.jwt.AuthResponse;
 import com.hakangul.jwt.JwtService;
+import com.hakangul.model.RefreshToken;
 import com.hakangul.model.User;
 import com.hakangul.model.dto.DtoUser;
+import com.hakangul.repository.RefreshTokenRepository;
 import com.hakangul.repository.UserRepository;
 import com.hakangul.service.IAuthService;
 
@@ -32,6 +38,16 @@ public class AuthServiceImpl implements IAuthService {
     @Autowired
     private JwtService jwtService;
 
+    @Autowired
+    private RefreshTokenRepository refreshTokenRepository; // Fixed typo
+
+    private RefreshToken createRefreshToken(User user) {
+        RefreshToken refreshToken = new RefreshToken();
+        refreshToken.setRefReshToken(UUID.randomUUID().toString());
+        refreshToken.setExpireDate(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 4));
+        refreshToken.setUser(user);
+        return refreshToken;
+    }
 
 
     @Override
@@ -39,9 +55,12 @@ public class AuthServiceImpl implements IAuthService {
         try {
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
             authenticationProvider.authenticate(auth);
-            String token = jwtService.generateToken(userRepository.findByUsername(request.getUsername()).get());
+            Optional<User> opt = userRepository.findByUsername(request.getUsername());
+            String accessToken = jwtService.generateToken(opt.get());
+            RefreshToken refreshToken = createRefreshToken(opt.get());
+            refreshTokenRepository.save(refreshToken);
 
-            return new AuthResponse(token);
+            return new AuthResponse(accessToken, refreshToken.getRefReshToken());
         } catch (AuthenticationException e) {
             System.out.println("Kullanıcı Adı veya Şifre Hatalı");
         }
