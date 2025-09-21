@@ -25,5 +25,5 @@ public class Employee {
     private String lastName;
 
     @ManyToOne(optional = false) // departmant is required
-    private Departmant departmant;
+    private Department departmant;
 }

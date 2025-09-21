@@ -74,7 +74,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         } catch (ExpiredJwtException e) {
             // Token süresi dolmuş hatası
-            System.out.println("Token Süresi dolmuştur "+ e.getMessage());
+            System.out.println("Token Süresi dolmuştur " + e.getMessage());
         } catch (UsernameNotFoundException e) {
             // Genel hata yakalama
             System.out.println("Genel bir hata oluştu : "+ e.getLocalizedMessage());

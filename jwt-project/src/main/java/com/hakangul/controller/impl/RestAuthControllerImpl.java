@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hakangul.controller.IRestAuthController;
 import com.hakangul.jwt.AuthRequest;
+import com.hakangul.jwt.AuthResponse;
 import com.hakangul.model.dto.DtoUser;
 import com.hakangul.service.IAuthService;
 
@@ -23,6 +24,13 @@ public class RestAuthControllerImpl implements IRestAuthController {
     @Override
     public DtoUser register(@Valid @RequestBody AuthRequest request) {
         return authService.register(request);
+    }
+
+
+    @PostMapping("/authenticate")
+    @Override
+    public AuthResponse authenticate(@RequestBody AuthRequest request) {
+        return authService.authenticate(request);
     }
 
 

@@ -16,7 +16,7 @@ import lombok.Setter;
 @Table(name = "departmant")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Departmant {
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
